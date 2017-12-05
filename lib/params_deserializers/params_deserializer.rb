@@ -89,7 +89,9 @@ class ParamsDeserializer
   end
 
   def verify_valid_keys
-    invalid_params = params_root.symbolize_keys.keys - self.class.attrs.map(&:original_name)
+    # TODO symbolize keys will no longer work in rails 5.1, since
+    # params will be an instance of ActionController::Parameters
+    invalid_params = params_root.to_unsafe_hash.symbolize_keys.keys - self.class.attrs.map(&:original_name)
     if self.class.strict_mode && !invalid_params.empty?
       raise InvalidKeyError, "Invalid keys in params: #{invalid_params.map(&:inspect).join(",")}."
     end
