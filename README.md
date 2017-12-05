@@ -191,7 +191,7 @@ If you'd like a different instance variable name, such as `better_params`, pass 
 
 `better_params` will now be available to your controller action.
 
-`deserialize_params_with` passes on any remaining keys in the options hash to `before_filter`, which means you can restrict deserialization to only certain controller actions:
+`deserialize_params_with` passes on any remaining keys in the options hash to `before_action`, which means you can restrict deserialization to only certain controller actions:
 
 ```ruby
   deserialize_params_with UserParamsDeserializer, as: :better_params, only: [:create, :update]
